@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.allwork">
+	<insert id="dateinsert" parameterType="dao.WorkspaceImple">
+		insert into
+		greenconstruction (worsite,pm2.5,pm10,noise,domestic
+		electricity,office
+		electricty,industrial electricty,domestic
+		water,office
+		water,industrial water,aqi) values
+		(#{worsite},#{pm25},#{pm10},#{noise},#{domesticelectricity},#{officeelectricty},#{industrialelectricty},#{domesticwater},#{officewater},#{industrialwater},#{aqi})
+	</insert>
+	<update id="dateupaqi" parameterType="int">
+
+	</update>
+	<select id="selectmounth" parameterType="String"
+		resultType="dao.WorkspaceImple">
+		select * from greenconstruction where worksite=#{worksite}
+		and
+		DATE_FORMAT(data,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
+	</select>
+	<select id="aqi1" parameterType="String" resultType="int">
+		select count(aqi) from greenconstruction where <![CDATA[ worksite=#{worksite} and aqi<50 ]]>
+	</select>
+	<select id="aqi2" parameterType="String" resultType="int">
+		select count(aqi) from greenconstruction where <![CDATA[ worksite=#{worksite} and 50<aqi and aqi<=100 ]]>
+	</select>
+	<select id="aqi3" parameterType="String" resultType="int">
+		select count(aqi) from greenconstruction where <![CDATA[ worksite=#{worksite} and 100<aqi and aqi<=150 ]]>
+	</select>
+	<select id="aqi4" parameterType="String" resultType="int">
+		select count(aqi) from greenconstruction where <![CDATA[ worksite=#{worksite} and 150<aqi and aqi<=200 ]]>
+	</select>
+	<select id="aqi5" parameterType="String" resultType="int">
+		select count(aqi) from greenconstruction where <![CDATA[ worksite=#{worksite} and 200<aqi and aqi<=300 ]]>
+	</select>
+	<select id="aqi6" parameterType="String" resultType="int">
+		select count(aqi) from greenconstruction where <![CDATA[ worksite=#{worksite} and 300<aqi ]]>
+	</select>
+</mapper>
